@@ -11,7 +11,7 @@ Studentas::Studentas()
 
 // Užpildytas konstruktorius
 Studentas::Studentas(const std::string& vardas, const std::string& pavarde,
-                     const std::vector<int>& nd, int egzaminas)
+                     const Vector<int>& nd, int egzaminas)
     : Zmogus(vardas, pavarde), nd_(nd), egzaminas_(egzaminas) {
     skaiciuotiGalutini('v');  // default 'vidurkis'
 }
@@ -62,8 +62,8 @@ Studentas& Studentas::operator=(Studentas&& other) noexcept {
 
 // Getteriai
 double Studentas::galutinis() const { return galutinis_; }
-const std::vector<int>& Studentas::nd() const { return nd_;}
-int Studentas::egzaminas() const { return egzaminas_;}
+const Vector<int>& Studentas::nd() const { return nd_; }
+int Studentas::egzaminas() const { return egzaminas_; }
 
 // Setteriai
 void Studentas::setEgzaminas(int egz) { egzaminas_ = egz; }

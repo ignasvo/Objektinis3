@@ -4,20 +4,20 @@
 #include <ostream>
 #include <iostream>
 #include <string>
-#include <vector>
+#include "vector.h"
 #include <algorithm>
 #include <numeric>
 #include "zmogus.h"
 
 class Studentas : public Zmogus {
 private:
-    std::vector<int> nd_;
+    Vector<int> nd_;
     int egzaminas_;
     double galutinis_;
 
 public:
     Studentas(); // tuščias konstruktorius
-    Studentas(const std::string& vardas, const std::string& pavarde, const std::vector<int>& nd, int egzaminas);
+    Studentas(const std::string& vardas, const std::string& pavarde, const Vector<int>& nd, int egzaminas);
     Studentas(const Studentas& other);            // Copy constructor
     Studentas(Studentas&& other) noexcept;        // Move constructor
     ~Studentas();                                 // Destruktorius
@@ -27,7 +27,7 @@ public:
     // Getteriai
     int egzaminas() const;
     double galutinis() const;
-    const std::vector<int>& nd() const;
+    const Vector<int>& nd() const;
 
     // Setteriai
     void setEgzaminas(int egzaminas);

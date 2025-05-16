@@ -1,5 +1,6 @@
 #include "funkcijos.h"
 #include "Studentas.h"
+#include "vector.h"
 
 // Tikrinam ar vardas sudarytas tik iš raidžių
 bool arTinkamasVardas(const std::string& tekstas) {
@@ -31,7 +32,7 @@ bool arTinkamasPazymys(int& pazymys) {
 }
 
 // Skaičiuojam vidurkį
-double skaiciuotiVidurki(const std::vector<int>& pazymiai) {
+double skaiciuotiVidurki(const Vector<int>& pazymiai) {
     if (pazymiai.empty()) return 0.0;
     double suma = 0;
     for (int p : pazymiai) suma += p;
@@ -39,7 +40,7 @@ double skaiciuotiVidurki(const std::vector<int>& pazymiai) {
 }
 
 // Skaičiuojam medianą
-double skaiciuotiMediana(std::vector<int> pazymiai) {
+double skaiciuotiMediana(Vector<int> pazymiai) {
     if (pazymiai.empty()) return 0.0;
     std::sort(pazymiai.begin(), pazymiai.end());
     return (pazymiai.size() % 2 == 0) ? (pazymiai[pazymiai.size()/2 - 1] + pazymiai[pazymiai.size()/2]) / 2.0 : pazymiai[pazymiai.size()/2];
@@ -57,10 +58,10 @@ void generuotiPazymius(Studentas& studentas, int kiek) {
 }
 
 // Funkcija: generuojam keletą studentų
-void generuotiStudentus(std::vector<Studentas>& studentai, int kiek, int ndSk) {
-    std::vector<std::string> vardai = {"Jonas", "Petras", "Marius", "Tomas", "Lukas", "Paulius", "Mantas", "Kazys", "Antanas", "Darius"};
-    std::vector<std::string> pavardes = {"Kazlauskas", "Petraitis", "Jankauskas", "Jonaitis", "Brazinskas", "Stankevicius", "Kavaliauskas", "Zukauskas", "Kavolis"};
-    
+void generuotiStudentus(Vector<Studentas>& studentai, int kiek, int ndSk) {
+    Vector<std::string> vardai = {"Jonas", "Petras", "Marius", "Tomas", "Lukas", "Paulius", "Mantas", "Kazys", "Antanas", "Darius"};
+    Vector<std::string> pavardes = {"Kazlauskas", "Petraitis", "Jankauskas", "Jonaitis", "Brazinskas", "Stankevicius", "Kavaliauskas", "Zukauskas", "Kavolis"};
+
     for (int i = 0; i < kiek; ++i) {
         Studentas s;
         s.setVardas(vardai[rand() % vardai.size()]);
@@ -71,7 +72,7 @@ void generuotiStudentus(std::vector<Studentas>& studentai, int kiek, int ndSk) {
     }
 }
 
-void spausdintiRezultatus(const std::vector<Studentas>& studentai, std::ostream& out) {
+void spausdintiRezultatus(const Vector<Studentas>& studentai, std::ostream& out) {
     if (studentai.empty()) {
         out << "Nera studentu duomenu.\n";
         return;
@@ -88,7 +89,7 @@ void spausdintiRezultatus(const std::vector<Studentas>& studentai, std::ostream&
 
 
 // Funkcija: nuskaityti studentus iš failo
-void nuskaitytiIsFailo(std::vector<Studentas>& studentai, const std::string& failoVardas) {
+void nuskaitytiIsFailo(Vector<Studentas>& studentai, const std::string& failoVardas) {
     std::ifstream failas(failoVardas);
     if (!failas) throw std::runtime_error("Failas nerastas: " + failoVardas);
 
@@ -105,7 +106,7 @@ void nuskaitytiIsFailo(std::vector<Studentas>& studentai, const std::string& fai
 
 
 // Funkcija: rikiuoti studentus pagal pasirinkimą
-void rikiuotiStudentus(std::vector<Studentas>& studentai, char kriterijus) {
+void rikiuotiStudentus(Vector<Studentas>& studentai, char kriterijus) {
     switch (std::tolower(kriterijus)) {
         case 'v':
             std::sort(studentai.begin(), studentai.end(), compareVardas);
@@ -124,7 +125,7 @@ void rikiuotiStudentus(std::vector<Studentas>& studentai, char kriterijus) {
 
 // Funkcija: generuoti failą su studentais
 void generuotiFaila(const std::string& failoPavadinimas, int studentuKiekis, int ndSk, char metodas) {
-    std::vector<Studentas> studentai;
+    Vector<Studentas> studentai;
     generuotiStudentus(studentai, studentuKiekis, ndSk);
 
     std::ofstream out(failoPavadinimas);
@@ -151,7 +152,7 @@ void generuotiFaila(const std::string& failoPavadinimas, int studentuKiekis, int
 }
 
 
-void padalintiStudentus(const std::vector<Studentas>& studentai, std::vector<Studentas>& vargsiai, std::vector<Studentas>& kietiakai) {
+void padalintiStudentus(const Vector<Studentas>& studentai, Vector<Studentas>& vargsiai, Vector<Studentas>& kietiakai) {
     for (const auto& s : studentai) {
         if (s.galutinis() < 5.0)
             vargsiai.push_back(s);
@@ -161,7 +162,7 @@ void padalintiStudentus(const std::vector<Studentas>& studentai, std::vector<Stu
 }
 
 // Funkcija: spausdinti studentus į failą
-void spausdintiStudentusIFaila(const std::vector<Studentas>& studentai, const std::string& failoVardas) {
+void spausdintiStudentusIFaila(const Vector<Studentas>& studentai, const std::string& failoVardas) {
     std::ofstream out(failoVardas);
     if (!out) {
         std::cerr << "Nepavyko atidaryti failo: " << failoVardas;
@@ -172,12 +173,12 @@ void spausdintiStudentusIFaila(const std::vector<Studentas>& studentai, const st
 }
 
 void apdorotiFaila(const std::string& failoVardas, char metodas) {
-    std::vector<Studentas> studentai;
+    Vector<Studentas> studentai;
     try {
         nuskaitytiIsFailo(studentai, failoVardas);
         for (auto& s : studentai) s.skaiciuotiGalutini(metodas);
 
-        std::vector<Studentas> vargsiai, kietiakai;
+        Vector<Studentas> vargsiai, kietiakai;
         padalintiStudentus(studentai, vargsiai, kietiakai);
 
         std::string baseName = failoVardas.substr(0, failoVardas.find_last_of('.'));
@@ -203,7 +204,7 @@ void apdorotiFaila(const std::string& failoVardas, char metodas) {
 }
 
 void vykdytiPrograma() {
-    std::vector<Studentas> studentai;
+    Vector<Studentas> studentai;
     srand(time(0));
 
     try {
