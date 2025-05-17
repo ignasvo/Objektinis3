@@ -108,14 +108,14 @@ public:
 
     reference at(size_type pos) {
         if (pos >= size_) {
-            throw std::out_of_range("Vector::at - index out of range");
+            throw std::out_of_range("out of range");
         }
         return vec_[pos];
     }
 
     const_reference at(size_type pos) const {
         if (pos >= size_) {
-            throw std::out_of_range("Vector::at - index out of range");
+            throw std::out_of_range("out of range");
         }
         return vec_[pos];
     }
@@ -237,7 +237,7 @@ public:
 
     iterator erase(const_iterator pos) {
         if (pos < cbegin() || pos >= cend()) {
-            throw std::out_of_range("Vector::erase - iterator out of range");
+            throw std::out_of_range("out of range");
         }
         iterator non_const_pos = begin() + (pos - cbegin());
         std::move(non_const_pos + 1, end(), non_const_pos);
@@ -247,7 +247,7 @@ public:
 
     iterator erase(const_iterator first, const_iterator last) {
         if (first < cbegin() || last > cend() || first > last) {
-            throw std::out_of_range("Vector::erase - iterator range out of range");
+            throw std::out_of_range("out of range");
         }
         iterator non_const_first = begin() + (first - cbegin());
         if (first != last) {
