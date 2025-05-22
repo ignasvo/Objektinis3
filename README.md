@@ -1,4 +1,4 @@
-# 2.0 nuosavos Vector klasės testavimas
+# 3.0 nuosavos Vector klasės testavimas
 
 ## Aprašymas
 
@@ -7,12 +7,29 @@
 ## 5 funkcijų pavyzdžiai
 
 ### 1. `operator[]`
+
+```cpp
+reference operator[](size_type pos) {
+    return vec_[pos];
+}
+```
+
 ```cpp
 Vector<int> v = {1, 2, 3};
 std::cout << v[1]; // Output: 2
 ```
 
 ### 2. `push_back`
+
+```cpp
+void push_back(const T& value) {
+    if (size_ >= capacity_) {
+        reserve(capacity_ == 0 ? 1 : capacity_ * 2);
+    }
+    vec_[size_++] = value;
+}
+```
+
 ```cpp
 Vector<std::string> v;
 v.push_back("labas");
@@ -20,6 +37,16 @@ v.push_back("pasauli");
 ```
 
 ### 3. `at()`
+
+```cpp
+reference at(size_type pos) {
+    if (pos >= size_) {
+        throw std::out_of_range("out of range");
+}
+ return vec_[pos];
+}
+```
+
 ```cpp
 Vector<int> v = {10, 20};
 try {
@@ -30,17 +57,38 @@ try {
 ```
 
 ### 4. `operator==`
+
+```cpp
+bool operator==(const Vector& other) const {
+    if (size_ != other.size_) return false;
+    return std::equal(begin(), end(), other.begin());
+}
+```
+
 ```cpp
 Vector<int> a = {1, 2, 3};
 Vector<int> b = {1, 2, 3};
 std::cout << (a == b); // Output: 1
 ```
 
-### 5. `emplace_back()`
+### 5. `empty()`
+
 ```cpp
-struct Test { int x, y; Test(int a, int b) : x(a), y(b) {} };
-Vector<Test> v;
-v.emplace_back(1, 2);
+    bool empty() const noexcept {
+        return size_ == 0;
+    }
+```
+
+```cpp
+if (numbers.empty()) {
+    std::cout << "Vector yra tuščias!\n";
+}
+
+numbers.push_back(10);
+
+if (!numbers.empty()) {
+    std::cout << "Vector jau nėra tuščias!\n";
+}
 ```
 
 ## Testavimas
