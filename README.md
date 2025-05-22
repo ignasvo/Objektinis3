@@ -114,3 +114,7 @@ Toliau pateikiama palyginamoji `push_back()` operacijos trukmė skirtingiems ele
 
 **Komentaras:**
 - Mūsų `Vector` klasė ženkliai spartesnė nei `std::vector` pagal šiuos bandymus.
+
+# Perskirstymų skaičius
+![image](https://github.com/user-attachments/assets/a8943b62-a76b-49f7-9c0c-158b75fad368)
+
