@@ -2,6 +2,12 @@
 #include "Studentas.h"
 #include "vector.h"
 
+void waitForEnter() {
+    std::cout << "\nPress Enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.get();  // Wait for Enter key
+}
+
 // Tikrinam ar vardas sudarytas tik iš raidžių
 bool arTinkamasVardas(const std::string& tekstas) {
     for (char c : tekstas) {
@@ -396,6 +402,7 @@ void vykdytiPrograma() {
             spausdintiStudentusIFaila(studentai, failas);
         } else {
             spausdintiRezultatus(studentai, std::cout);
+            waitForEnter();
         }
     } catch (const std::exception& e) {
         std::cerr << "Kritine klaida: " << e.what() << std::endl;
