@@ -128,3 +128,11 @@ Vykdoma trečioji strategija naudojant `std::vector` ir `class Vector`.
 | `std::vector`     | 0.462753             | 6.43146               | 68.913                 |
 | `class Vector`    | 0.410347             | 5.48372               | 54.9732                |
 
+## Įdiegimas
+1. Atsisiųskite `Setup.exe`
+2. Paleiskite diegimo programą (reikės administratoriaus teisių)
+3. Sekite diegimo vedlio nurodymus
+4. Programą rasite:
+   - `C:\Program Files\VU\Vardenis-Pavardenis\`
+   - Darbalaukyje (nuoroda)
+   - Start meniu: VU → Vardenis-Pavardenis
