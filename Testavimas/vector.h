@@ -15,6 +15,7 @@ private:
     T* vec_;
     size_t capacity_;
     size_t size_;
+    size_t reallocations; // Skaitiklis perskirstymams
 
     void reallocate(size_t new_capacity) {
         T* new_vec = new T[new_capacity];
@@ -206,6 +207,10 @@ public:
         return capacity_;
     }
 
+    size_type getReallocations() const {
+        return reallocations;
+    }
+
     size_type max_size() const noexcept {
         return std::numeric_limits<size_type>::max() / sizeof(T);
     }
@@ -261,6 +266,7 @@ public:
     void push_back(const T& value) {
         if (size_ >= capacity_) {
             reserve(capacity_ == 0 ? 1 : capacity_ * 2);
+            reallocations++;
         }
         vec_[size_++] = value;
     }
