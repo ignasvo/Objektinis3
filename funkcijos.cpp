@@ -206,14 +206,12 @@ void apdorotiFaila(const std::string& failoVardas, char metodas) {
 void testMemoryReallocations() {
     const size_t N = 100000000;
 
-    // Testuojame Vector
     Vector<int> myVec;
     for (size_t i = 0; i < N; ++i) {
         myVec.push_back(i);
     }
     std::cout << "Vector perskirstymai: " << myVec.getReallocations() << std::endl;
 
-    // Testuojame std::vector
     std::vector<int> stdVec;
     size_t stdReallocations = 0;
     size_t prevCapacity = 0;
