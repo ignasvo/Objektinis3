@@ -118,3 +118,13 @@ Toliau pateikiama palyginamoji `push_back()` operacijos trukmė skirtingiems ele
 # Perskirstymų skaičius
 ![image](https://github.com/user-attachments/assets/a8943b62-a76b-49f7-9c0c-158b75fad368)
 
+markdown
+# Programos spartos analizė
+
+Vykdoma trečioji strategija naudojant `std::vector` ir `class Vector`.
+
+| Konteinerio tipas | 100,000 studentų (s) | 1,000,000 studentų (s) | 10,000,000 studentų (s) |
+|-------------------|----------------------|------------------------|-------------------------|
+| `std::vector`     | 0.462753             | 6.43146               | 68.913                 |
+| `class Vector`    | 0.410347             | 5.48372               | 54.9732                |
+
