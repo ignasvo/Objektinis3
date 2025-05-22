@@ -74,9 +74,9 @@ std::cout << (a == b); // Output: 1
 ### 5. `empty()`
 
 ```cpp
-    bool empty() const noexcept {
-        return size_ == 0;
-    }
+bool empty() const noexcept {
+    return size_ == 0;
+}
 ```
 
 ```cpp
