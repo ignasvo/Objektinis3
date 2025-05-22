@@ -203,6 +203,30 @@ void apdorotiFaila(const std::string& failoVardas, char metodas) {
     }
 }
 
+void testMemoryReallocations() {
+    const size_t N = 100000000;
+
+    // Testuojame Vector
+    Vector<int> myVec;
+    for (size_t i = 0; i < N; ++i) {
+        myVec.push_back(i);
+    }
+    std::cout << "Vector perskirstymai: " << myVec.getReallocations() << std::endl;
+
+    // Testuojame std::vector
+    std::vector<int> stdVec;
+    size_t stdReallocations = 0;
+    size_t prevCapacity = 0;
+    for (size_t i = 0; i < N; ++i) {
+        stdVec.push_back(i);
+        if (stdVec.capacity() != prevCapacity) {
+            stdReallocations++;
+            prevCapacity = stdVec.capacity();
+        }
+    }
+    std::cout << "std::vector perskirstymai: " << stdReallocations << std::endl;
+}
+
 void vykdytiPrograma() {
     Vector<Studentas> studentai;
     srand(time(0));
@@ -224,7 +248,8 @@ void vykdytiPrograma() {
                 std::cout << "4 - Nuskaityti is failo\n";
                 std::cout << "5 - Generuoti failus\n";
                 std::cout << "6 - Apdoroti faila\n";
-                std::cout << "7 - Baigti\n";
+                std::cout << "7 - Testuoti atminties perskirstymus\n";
+                std::cout << "8 - Baigti\n";
                 std::cout << "Jusu pasirinkimas: ";
                 int pasirinkimas;
                 if (!(std::cin >> pasirinkimas)) {
@@ -232,7 +257,7 @@ void vykdytiPrograma() {
                 }
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-                if (pasirinkimas == 7) {
+                if (pasirinkimas == 8) {
                     testi = false;
                     break;
                 }
@@ -337,6 +362,10 @@ void vykdytiPrograma() {
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
                     apdorotiFaila(failas, metodas);
+                }
+                
+                else if (pasirinkimas == 7) {
+                    testMemoryReallocations();
                 }
                 else {
                     std::cout << "Neteisingas pasirinkimas.\n";

@@ -15,6 +15,7 @@
 #include <limits>
 #include <stdexcept>
 #include <chrono>
+#include <vector>
 
 // Funkcijos, kurios dirba su studentų sąrašu
 
